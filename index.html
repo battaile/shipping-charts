@@ -1,0 +1,33 @@
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <div id="chart_div"></div>
+  <script type="text/javascript">
+  	google.load('visualization', '1', {packages: ['corechart', 'bar']});
+	google.setOnLoadCallback(drawMaterial);
+
+	function drawMaterial() {
+	      var data = google.visualization.arrayToDataTable([
+	        ['Days', 'Number of Orders'],
+	        ['1', 8],
+	        ['2', 3],
+	        ['3', 2],
+	        ['4', 2],
+	        ['5', 1]
+	      ]);
+
+	      var options = {
+	        chart: {
+	          title: 'Days in Transit'
+	        },
+	        hAxis: {
+	          title: 'Number of Orders',
+	          minValue: 0,
+	        },
+	        vAxis: {
+	          title: 'Days in Transit'
+	        },
+	        bars: 'horizontal'
+	      };
+	    var material = new google.charts.Bar(document.getElementById('chart_div'));
+	    material.draw(data, options);
+    }
+  </script>
