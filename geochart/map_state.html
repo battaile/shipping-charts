@@ -7,21 +7,19 @@
 
       function drawRegionsMap() {
 
+        // this will be data driven
         var data = google.visualization.arrayToDataTable([
-          ['Country', 'Late %'],
-          ['US', 3],
-          ['CA', 3],
-          ['RU', 4],
-          ['AU', 5],
-          ['NZ', 6],
-          ['BR',20],
-          ['MX',11],
-          ['EU',5],
-          ['FR',1],
-          ['CN',15],
+          ['Metro', 'Late %'],
+          ['US-592', 3],
+          ['US-539', 3],
+          ['US-686', 20]
         ]);
 
+        var state = getState();
+        console.log(state);
         var options = {
+          region: state,
+          resolution: 'metros',
           colorAxis: {colors: ['#00853f', 'black', '#e31b23']},
           backgroundColor: '#81d4fa',
           datalessRegionColor: '#f8bbd0',
@@ -30,11 +28,20 @@
 
         var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
 
-        google.visualization.events.addListener(chart, 'regionClick', function (eventData) {
-          window.open('./map_country?country=' + eventData.region,'_self'); 
-        });
+        chart.draw(data, options);       
+      }
 
-        chart.draw(data, options);
+      function getState(){
+        var re = /(?:state=)(.*)/; 
+        var str = window.location.href;
+        var m;
+         
+        if ((m = re.exec(str)) !== null) {
+            if (m.index === re.lastIndex) {
+                re.lastIndex++;
+            }
+        }
+        return m[1];
       }
     </script>
   </head>

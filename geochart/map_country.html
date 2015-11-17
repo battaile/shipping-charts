@@ -36,6 +36,10 @@
 
         var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
 
+        google.visualization.events.addListener(chart, 'regionClick', function (eventData) {
+          window.open('./map_state?state=' + eventData.region,'_self'); 
+        });
+
         chart.draw(data, options);
 
        
